@@ -1,8 +1,8 @@
-import { PageSpeedRepor } from "@/modules/analysis/components/PageSpeedRepor";
+import PageSpeedReport from "@/modules/analysis/pageSpeed/PageSpeedReport";
 import React from "react";
 
 const FreeReportPage = () => {
-  return <PageSpeedRepor />;
+  return <PageSpeedReport />;
 };
 
 export default FreeReportPage;

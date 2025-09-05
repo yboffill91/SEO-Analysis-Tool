@@ -11,3 +11,6 @@ export * from "./skeleton";
 export * from "./tooltip";
 export * from "./card";
 export * from "./label";
+export * from "./alert";
+export * from "./circular-progress";
+export * from "./tabs";

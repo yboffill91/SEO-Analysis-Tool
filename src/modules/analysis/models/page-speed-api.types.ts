@@ -21,7 +21,7 @@ interface LoadingExperience {
 }
 
 // Auditoría individual
-interface Audit {
+export interface Audit {
   id: string;
   title: string;
   description: string;
@@ -32,7 +32,7 @@ interface Audit {
     | "error"
     | "informative"
     | "manual"
-    | "not_applicable"
+    | "notApplicable"
     | "numeric";
   displayValue?: string;
   explanation?: string;

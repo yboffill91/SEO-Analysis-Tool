@@ -4,7 +4,7 @@ import { RootInput } from "@/modules/ui/molecules/RootInput";
 import { Link, Zap } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { URL, urlSchema } from "@/models/url.type";
+import { URL, urlSchema } from "@/modules/analysis/models/url.type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { hasFullAccess } from "@/modules/user/helpers/hasAccess";

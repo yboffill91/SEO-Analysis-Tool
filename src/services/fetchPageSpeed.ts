@@ -1,7 +1,12 @@
+import { PageSpeedResponse } from "@/modules/analysis/models";
 import { pageSpeedUrl, pageSpeedKey } from "./api/endpoints.api";
 
-export const fetchPageSpeed = async (url: string, signal: AbortSignal) => {
-  const hitUrl = `${pageSpeedUrl}?url=https://${url}&key=${pageSpeedKey}`;
+export const fetchPageSpeed = async (
+  url: string,
+  signal: AbortSignal,
+  strategy: "desktop" | "mobile"
+): Promise<PageSpeedResponse> => {
+  const hitUrl = `${pageSpeedUrl}?url=https://${url}&key=${pageSpeedKey}&category=performance&category=best-practices&category=seo&category=accessibility&strategy=${strategy}`;
 
   const response = await fetch(hitUrl, { signal });
   if (!response.ok)
