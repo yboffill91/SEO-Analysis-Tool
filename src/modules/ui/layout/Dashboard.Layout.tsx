@@ -5,14 +5,7 @@ import {
 } from "@/modules/ui/athoms/sidebar";
 import { Separator } from "@radix-ui/react-separator";
 import { PropsWithChildren } from "react";
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-  BreadcrumbPage,
-} from "../athoms";
+
 import { AppSidebar } from "@/modules/sidebar/components/Sidebar";
 import { SiteBreadCrumb } from "../molecules/SiteBreadcrumb";
 

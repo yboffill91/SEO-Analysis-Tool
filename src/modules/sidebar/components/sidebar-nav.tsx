@@ -1,4 +1,4 @@
-import { BarChart2, BookOpen, Bot, Calendar, ScanSearch } from "lucide-react";
+import { BarChart2 } from "lucide-react";
 import { SidevarNavItem } from "../models/sidebar-nav-types";
 
 export const navMain: SidevarNavItem[] = [

@@ -1,4 +1,3 @@
-import { URL } from "@/modules/analysis/models/url.type";
 import { create } from "zustand";
 
 interface URLStore {

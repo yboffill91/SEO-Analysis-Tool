@@ -20,8 +20,8 @@ export const HomePage = () => {
         </h1>
         <p className="text-foreground/70 leading-tight tracking-tighter text-pretty mt-4">
           Get comprehensive SEO analysis and performance metrics to boost your
-          website's visibility and speed. On-page, off-page, and technical SEO
-          insights in one place.
+          websit&apos;'s visibility and speed. On-page, off-page, and technical
+          SEO insights in one place.
         </p>
         <HomeForm />
         <div className="w-full flex-center gap-4 flex-wrap mt-12">

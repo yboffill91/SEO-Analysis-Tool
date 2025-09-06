@@ -98,13 +98,6 @@ export const ReportHeader = ({
           </div>
         </div>
       </div>
-      {/* 
-          
-          
-           
-          
-          
-          */}
     </header>
   );
 };

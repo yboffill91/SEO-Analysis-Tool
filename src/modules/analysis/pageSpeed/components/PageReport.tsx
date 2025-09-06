@@ -5,7 +5,7 @@ import { ReportHeader } from "./ReportHeader";
 import { Separator } from "@/modules/ui/athoms";
 import { AuditsList } from "./AuditList";
 import Image from "next/image";
-import { Calendar, Clock, Link, LucideIcon } from "lucide-react";
+import { Calendar, Clock, Link } from "lucide-react";
 import { InfoPanel } from "./InfoPanel";
 
 interface Props {
@@ -106,7 +106,7 @@ export const ReportPage = ({ dataOrigin }: Props) => {
           title={"Metrics"}
         >
           <CardWrapper title="Core Web Vitals" className="my-4">
-            <div className="w-full h-64 rounded-lg grid grid-cols-8">
+            <div className="w-full h-64 rounded-lg grid grid-cols-8 overflow-auto">
               {screenShoots.map((screen: { data: string }, index: number) => (
                 <div className="relative " key={index}>
                   <Image

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ChevronRight, Plane, Settings, SunMoon, User } from "lucide-react";
+import { ChevronRight, Settings, SunMoon, User } from "lucide-react";
 
 import {
   DropdownMenu,

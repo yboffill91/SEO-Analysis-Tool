@@ -80,7 +80,7 @@ function extractCategories(response: PageSpeedResponse): CategoryData {
 
 export const usePageSpeedStore = create<PageSpeedStore & PageSpeedActions>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       data: {
         desktop: {
           response: null,

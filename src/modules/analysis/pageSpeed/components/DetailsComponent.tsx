@@ -43,7 +43,7 @@ export default function AuditDetailsRenderer({
   }
 
   return (
-    <Card className="p-4 mb-4 border-0 ">
+    <Card className="p-2 mb-4 border-0 overflow-x-auto w-96 mx-auto md:w-[26rem] lg:w-full">
       <div className="flex items-center justify-between mb-1">
         <h3 className="font-semibold">Audit Details</h3>
         <Badge variant="outline">{details.type}</Badge>
@@ -52,7 +52,7 @@ export default function AuditDetailsRenderer({
       {details.type === "table" || details.type === "opportunity" ? (
         <>
           {details.items && details.items.length > 0 ? (
-            <Table>
+            <Table className="-2">
               <TableHeader>
                 <TableRow>
                   {details.headings?.map((h) => (

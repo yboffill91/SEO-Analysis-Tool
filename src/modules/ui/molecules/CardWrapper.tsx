@@ -33,7 +33,7 @@ export function CardWrapper({
   return (
     <Card
       className={cn(
-        "rounded-lg shadow-md m-0.5 f-full justify-between",
+        "rounded-lg overflow-auto shadow-md m-0.5 f-full justify-between",
         mainWrapper && "w-full",
         `xl:col-span-${cols} lg:col-span-4 md:col-span-6 col-span-12`,
         className
