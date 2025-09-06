@@ -58,7 +58,7 @@ const PageSpeedReport = () => {
         </div>
       ) : (
         <>
-          <Tabs defaultValue="mobile" className="w-full flex-center flex-col">
+          <Tabs defaultValue="mobile" className="w-full flex-center flex-col ">
             <TabsList className="w-full flex-center max-w-sm">
               <TabsTrigger value="mobile">
                 <Smartphone />

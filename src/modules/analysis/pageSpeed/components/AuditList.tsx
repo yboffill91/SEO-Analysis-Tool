@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { Audit } from "../../models";
 import { cn } from "@/lib/utils";
-import { Check, Minus, Plus, X } from "lucide-react";
-import { Button } from "@/modules/ui/athoms";
+import { Check, ChevronDown, X } from "lucide-react";
+import {
+  Button,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/modules/ui/athoms";
 import Markdown from "react-markdown";
 import AuditDetailsRenderer, { AuditDetails } from "./DetailsComponent";
 import { IconScore } from "./IconScore";
+import { motion } from "framer-motion";
 
 interface Props {
   audit: Audit;
@@ -16,22 +22,36 @@ export const AuditsList = ({ audit }: Props) => {
   return (
     <div
       className={cn(
-        "px-1 py-4 relative border-b transition-all",
-        audit.scoreDisplayMode === "notApplicable" && "!text-foreground/30"
+        "px-1 h-32 py-4 relative border-b transition-all duration-300 ease-in-out p-4 cursor-pointer bg-accent/5 rounded-lg",
+        audit.scoreDisplayMode === "notApplicable" && "!text-foreground/30",
+        showAll && "h-full"
       )}
+      onClick={() => setShowAll(!showAll)}
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center justify-start gap-2 px-2">
           <IconScore score={audit.score} />
           <h4 className="text-lg font-semibold">{audit.title}</h4>
         </div>
-        <Button
-          onClick={() => setShowAll(!showAll)}
-          size={"icon"}
-          variant={"outline"}
-        >
-          {showAll ? <Minus /> : <Plus />}
-        </Button>
+        <Tooltip>
+          <TooltipTrigger>
+            <Button
+              onClick={() => setShowAll(!showAll)}
+              size={"icon"}
+              variant={"outline"}
+            >
+              <ChevronDown
+                className={cn(
+                  "rotate-0 transition-all duration-700 ease-in-out",
+                  showAll && "rotate-180"
+                )}
+              />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            {showAll ? "Hide Details" : "Show Details"}
+          </TooltipContent>
+        </Tooltip>
       </div>
       <div className="flex items-center justify-start gap-2 px-2 ">
         <Check
@@ -85,7 +105,12 @@ export const AuditsList = ({ audit }: Props) => {
         {audit.displayValue}
       </span>
       {showAll && (
-        <div className="bg-muted rounded-lg p-2 flex flex-col gap-4 mt-6">
+        <motion.div
+          className="bg-muted rounded-lg p-2 flex flex-col gap-4 mt-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+        >
           <div className="text-sm text-foreground/80 italic">
             {" "}
             <Markdown>{audit.description}</Markdown>
@@ -93,7 +118,7 @@ export const AuditsList = ({ audit }: Props) => {
           {audit.details && (
             <AuditDetailsRenderer details={audit.details as AuditDetails} />
           )}
-        </div>
+        </motion.div>
       )}
     </div>
   );

@@ -64,16 +64,16 @@ export const ReportPage = ({ dataOrigin }: Props) => {
 
   const warnings = returnedData.response?.lighthouseResult?.runWarnings ?? [];
   return (
-    <div className="min-h-96  flex-center flex-col gap-8 container mx-auto">
+    <div className="flex-center flex-col gap-8 ">
       <CardWrapper title="Speed Insight" className={cn("w-full relative")}>
         <span
           className={cn(
             "absolute top-0 inset-0 left-0 w-full h-96 bg-gradient-to-b rounded-t-lg",
             avgScore <= 0.49
-              ? "from-destructive/5 via-transparent to-transparent "
+              ? "from-destructive/20 via-transparent to-transparent "
               : avgScore > 0.49 && avgScore <= 0.89
-              ? "from-warning/5 via-transparent to-transparent "
-              : "from-success/5 via-transparent to-transparent "
+              ? "from-warning/20 via-transparent to-transparent "
+              : "from-success/20 via-transparent to-transparent "
           )}
         />
         <ReportHeader
