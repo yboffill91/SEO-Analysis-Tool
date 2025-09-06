@@ -22,11 +22,10 @@ export const AuditsList = ({ audit }: Props) => {
   return (
     <div
       className={cn(
-        "px-1 h-32 py-4 relative border-b transition-all duration-300 ease-in-out p-4 cursor-pointer bg-accent/5 rounded-lg",
+        "px-1 h-32 py-4 relative border transition-all duration-300 ease-in-out p-4  shadow rounded-lg",
         audit.scoreDisplayMode === "notApplicable" && "!text-foreground/30",
         showAll && "h-full"
       )}
-      onClick={() => setShowAll(!showAll)}
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center justify-start gap-2 px-2">
@@ -38,7 +37,8 @@ export const AuditsList = ({ audit }: Props) => {
             <Button
               onClick={() => setShowAll(!showAll)}
               size={"icon"}
-              variant={"outline"}
+              variant={"ghost"}
+              asChild
             >
               <ChevronDown
                 className={cn(
@@ -106,12 +106,12 @@ export const AuditsList = ({ audit }: Props) => {
       </span>
       {showAll && (
         <motion.div
-          className="bg-muted rounded-lg p-2 flex flex-col gap-4 mt-6"
+          className="border rounded-lg p-4 bg-accent/20 text-accent-foreground flex flex-col gap-4 mt-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, ease: "easeInOut" }}
         >
-          <div className="text-sm text-foreground/80 italic">
+          <div className="font-medium leading-relaxed">
             {" "}
             <Markdown>{audit.description}</Markdown>
           </div>

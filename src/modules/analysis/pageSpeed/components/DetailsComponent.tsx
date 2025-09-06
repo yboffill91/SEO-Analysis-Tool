@@ -43,7 +43,7 @@ export default function AuditDetailsRenderer({
   }
 
   return (
-    <Card className="p-2 mb-4 border-0 overflow-x-auto w-96 mx-auto md:w-[26rem] lg:w-full">
+    <Card className="p-4 bg-foreground/5 mx-auto shadow-none overflow-x-auto w-80 sm:w-96 md:w-[32rem] lg:w-full">
       <div className="flex items-center justify-between mb-1">
         <h3 className="font-semibold">Audit Details</h3>
         <Badge variant="outline">{details.type}</Badge>

@@ -49,7 +49,6 @@ export const ReportPage = ({ dataOrigin }: Props) => {
   const screenShoots =
     returnedData.response?.lighthouseResult?.audits["screenshot-thumbnails"]
       ?.details?.items;
-  console.log(returnedData.response);
 
   const auditTimeStamp = new Date(
     returnedData.response?.analysisUTCTimestamp ?? new Date()
@@ -129,7 +128,7 @@ export const ReportPage = ({ dataOrigin }: Props) => {
               ))}
             </div>
 
-            <div className="w-full grid lg:grid-cols-2 gap-4">
+            <div className="w-full grid lg:grid-cols-2 gap-4 mt-4">
               {performanceMetrics.map((audit) => {
                 return <AuditsList audit={audit} key={audit.id} />;
               })}
