@@ -2,10 +2,15 @@ import { CardWrapper } from "@/modules/ui/molecules/CardWrapper";
 import { usePageSpeedStore } from "@/store/pageSpeedStore";
 import { cn } from "@/lib/utils";
 import { ReportHeader } from "./ReportHeader";
-import { Separator } from "@/modules/ui/athoms";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+  Separator,
+} from "@/modules/ui/athoms";
 import { AuditsList } from "./AuditList";
 import Image from "next/image";
-import { Calendar, Clock, Link } from "lucide-react";
+import { AlertCircle, Calendar, Clock, Link } from "lucide-react";
 import { InfoPanel } from "./InfoPanel";
 
 interface Props {
@@ -13,11 +18,9 @@ interface Props {
 }
 
 export const ReportPage = ({ dataOrigin }: Props) => {
-  const returnedData =
-    dataOrigin === "mobile"
-      ? usePageSpeedStore((state) => state.data.mobile)
-      : usePageSpeedStore((state) => state.data.desktop);
+  const data = usePageSpeedStore((state) => state.data);
 
+  const returnedData = dataOrigin === "mobile" ? data.mobile : data.desktop;
   const performanceScore =
     returnedData.response?.lighthouseResult?.categories?.performance?.score ??
     0;
@@ -92,14 +95,20 @@ export const ReportPage = ({ dataOrigin }: Props) => {
           <InfoPanel label="Requested URL" icon={Link} value={requestedUrl} />
           <InfoPanel label="Responsed Timing" icon={Clock} value={timing} />
         </div>
-        {warnings?.length > 0 && (
-          <div className="p-4 flex items-start justify-start flex-col bg-warning/10 text-warning gap-4">
-            {warnings.map((warning, index) => (
-              <p key={index}>{warning}</p>
-            ))}
-          </div>
-        )}
         <Separator />
+        {warnings?.length > 0 && (
+          <Alert className="bg-warning/10 text-warning my-4">
+            <AlertCircle />
+            <AlertTitle>Warning</AlertTitle>
+            <AlertDescription className="text-warning">
+              {warnings.map((warning, index) => (
+                <p key={index} className="my-2 tracking-tight leading-tight">
+                  {warning}
+                </p>
+              ))}
+            </AlertDescription>
+          </Alert>
+        )}
         <CardWrapper
           className="border-0 bg-transparent shadow-none"
           title={"Metrics"}

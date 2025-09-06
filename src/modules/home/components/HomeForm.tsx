@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { URL, urlSchema } from "@/modules/analysis/models/url.type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { hasFullAccess } from "@/modules/user/helpers/hasAccess";
+import { useHasFullAccess } from "@/modules/user/helpers/hasAccess";
 import { useURLStore } from "@/store/urlStore";
 
 export const HomeForm = () => {
@@ -21,7 +21,7 @@ export const HomeForm = () => {
 
   const setUrl = useURLStore((state) => state.setUrl);
   const router = useRouter();
-  const grantFullAccess = hasFullAccess();
+  const grantFullAccess = useHasFullAccess();
   const onSubmit = (data: URL) => {
     setUrl(data.url);
     router.push(grantFullAccess ? "/pro-report" : "/free-report");

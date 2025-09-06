@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 import { CircularProgress } from "@/modules/ui/athoms";
-import { CardWrapper } from "@/modules/ui/molecules/CardWrapper";
 import { Triangle, Square, Circle } from "lucide-react";
 import Image from "next/image";
 import React from "react";

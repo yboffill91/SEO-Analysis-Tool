@@ -18,11 +18,11 @@ import {
   useSidebar,
 } from "@/modules/ui/athoms/sidebar";
 import { Button } from "@/modules/ui/athoms";
-import { UseThemeProps, useTheme } from "next-themes";
+import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { UserAvatar } from "@/modules/user/components/userAvatar";
 import { useUserStore } from "@/store/userStore";
-import { hasFullAccess } from "@/modules/user/helpers/hasAccess";
+import { useHasFullAccess } from "@/modules/user/helpers/hasAccess";
 
 export function DashboardHeadMenu() {
   const { isMobile } = useSidebar();
@@ -30,7 +30,7 @@ export function DashboardHeadMenu() {
   const [mounted, setMounted] = useState(false);
   const userName = useUserStore((state) => state.name);
   const userOcupation = useUserStore((state) => state.ocupation);
-  const fullAccessGranted = hasFullAccess();
+  const fullAccessGranted = useHasFullAccess();
 
   useEffect(() => {
     setMounted(true);

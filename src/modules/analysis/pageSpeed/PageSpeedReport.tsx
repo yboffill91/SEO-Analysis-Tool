@@ -31,12 +31,13 @@ const PageSpeedReport = () => {
     if (!url) {
       router.push("/");
     }
-    const { signal } = new AbortController();
+    const controller = new AbortController();
+    const { signal } = controller;
     fetchData(url!, signal);
     return () => {
-      signal.aborted;
+      controller.abort();
     };
-  }, [url, fetchData]);
+  }, [url, fetchData, router]);
 
   return (
     <>
