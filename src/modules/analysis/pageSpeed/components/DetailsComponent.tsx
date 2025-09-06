@@ -21,10 +21,12 @@ interface Heading {
 
 export interface AuditDetails {
   type: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   items?: Record<string, any>[];
   headings?: Heading[];
   overallSavingsMs?: number;
   overallSavingsBytes?: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   debugData?: Record<string, any>;
   node?: { snippet?: string; selector?: string };
 }
@@ -114,6 +116,7 @@ export default function AuditDetailsRenderer({
 /**
  * Renderizador de valores de celda según `valueType`
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function renderCell(value: any, valueType?: string) {
   if (value == null) return "-";
 

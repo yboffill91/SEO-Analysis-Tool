@@ -37,7 +37,9 @@ export interface Audit {
   displayValue?: string;
   explanation?: string;
   errorMessage?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   warnings?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   details?: Record<string, any>;
 }
 
@@ -92,6 +94,7 @@ interface RuntimeError {
 interface ConfigSettings {
   emulatedFormFactor: "UNKNOWN_FORM_FACTOR" | "desktop" | "mobile" | "none";
   locale: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onlyCategories?: any;
 }
 
@@ -110,6 +113,7 @@ interface LighthouseResult {
   userAgent: string;
   fetchTime: string;
   environment: Environment;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   runWarnings: any[];
   configSettings: ConfigSettings;
   audits: Record<string, Audit>;
