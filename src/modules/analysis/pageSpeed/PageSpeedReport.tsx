@@ -3,6 +3,7 @@ import {
   Alert,
   AlertDescription,
   AlertTitle,
+  Separator,
   Tabs,
   TabsContent,
   TabsList,
@@ -15,16 +16,23 @@ import { usePageSpeedStore } from "@/store/pageSpeedStore";
 import { MainSkeleton } from "./components/MainSkeleton";
 import { useEffect } from "react";
 import { useURLStore } from "@/store/urlStore";
+import { useRouter } from "next/navigation";
+import { HomeForm } from "@/modules/home/components/HomeForm";
+import { CardWrapper } from "@/modules/ui/molecules/CardWrapper";
 
 const PageSpeedReport = () => {
   const loading = usePageSpeedStore((state) => state.loading);
   const fetchData = usePageSpeedStore((state) => state.fetchPageSpeedAll);
   const error = usePageSpeedStore((state) => state.error);
   const url = useURLStore((state) => state.url);
+  const router = useRouter();
 
   useEffect(() => {
+    if (!url) {
+      router.push("/");
+    }
     const { signal } = new AbortController();
-    fetchData(url, signal);
+    fetchData(url!, signal);
     return () => {
       signal.aborted;
     };
@@ -35,14 +43,18 @@ const PageSpeedReport = () => {
       {loading ? (
         <MainSkeleton />
       ) : error ? (
-        <div className="container max-w-sm p-1 flex-center mx-auto">
+        <div className="container max-w-sm p-1 flex-center mx-auto flex-col gap-8">
           <Alert variant={"destructive"}>
             <AlertTitle>
               <TriangleAlert />
-              <h2>An Error has occurred1</h2>
+              <h2>An Error has occurred!</h2>
             </AlertTitle>
             <AlertDescription>{error}</AlertDescription>
           </Alert>
+          <Separator />
+          <CardWrapper title="Try Again" className="w-full">
+            <HomeForm />
+          </CardWrapper>
         </div>
       ) : (
         <>

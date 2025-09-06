@@ -14,3 +14,6 @@ export * from "./label";
 export * from "./alert";
 export * from "./circular-progress";
 export * from "./tabs";
+export * from "./table";
+export * from "./badge";
+export * from "./accordion";

@@ -51,11 +51,10 @@ function extractCategories(response: PageSpeedResponse): CategoryData {
       speedIndex: audits["speed-index"],
     },
     seo: {
-      titleElement: audits["title-element"],
       metaDescription: audits["meta-description"],
       httpStatusCode: audits["http-status-code"],
       isCrawlable: audits["is-crawlable"],
-      linksCrawlable: audits["links-crawlable"],
+      crawlableAnchors: audits["crawlable-anchors"],
       robotsTxt: audits["robots-txt"],
       canonical: audits["canonical"],
       hreflang: audits["hreflang"],
@@ -67,7 +66,8 @@ function extractCategories(response: PageSpeedResponse): CategoryData {
       imageSizeResponsive: audits["image-size-responsive"],
       imageAspectRatio: audits["image-aspect-ratio"],
       usesRelPreconnect: audits["uses-rel-preconnect"],
-      usesRelPreload: audits["uses-rel-preload"],
+      unusedCss: audits["unused-css-rules"],
+      unusedJS: audits["unused-javascript"],
     },
     accessibility: {
       colorContrast: audits["color-contrast"],
@@ -106,14 +106,14 @@ export const usePageSpeedStore = create<PageSpeedStore & PageSpeedActions>()(
       fetchedAt: null,
       fetchPageSpeedAll: async (
         url: string,
-        signal: AbortSignal,
-        force = false
+        signal: AbortSignal
+        // force = false
       ) => {
-        const now = Date.now();
-        const lastFetched = get().fetchedAt;
+        // const now = Date.now();
+        // const lastFetched = get().fetchedAt;
 
-        // refresco solo si pasaron más de 10 minutos o se fuerza
-        if (!force && lastFetched && now - lastFetched < 10 * 60 * 1000) return;
+        // // refresco solo si pasaron más de 10 minutos o se fuerza
+        // if (!force && lastFetched && now - lastFetched < 10 * 60 * 1000) return;
 
         set({ loading: true, error: null });
 

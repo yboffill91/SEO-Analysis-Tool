@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Audit } from "../../models";
 import { cn } from "@/lib/utils";
-import { Circle, Minus, Plus, Square, Triangle } from "lucide-react";
-import { Button, Separator } from "@/modules/ui/athoms";
+import { Check, Minus, Plus, X } from "lucide-react";
+import { Button } from "@/modules/ui/athoms";
 import Markdown from "react-markdown";
+import AuditDetailsRenderer, { AuditDetails } from "./DetailsComponent";
+import { IconScore } from "./IconScore";
 
 interface Props {
   audit: Audit;
@@ -14,7 +16,7 @@ export const AuditsList = ({ audit }: Props) => {
   return (
     <div
       className={cn(
-        "px-1 py-4 relative border-b ",
+        "px-1 py-4 relative border-b transition-all",
         audit.scoreDisplayMode === "notApplicable" && "!text-foreground/30"
       )}
     >
@@ -31,15 +33,40 @@ export const AuditsList = ({ audit }: Props) => {
           {showAll ? <Minus /> : <Plus />}
         </Button>
       </div>
-      <p>
-        {audit.scoreDisplayMode === "numeric"
-          ? `Score: ${audit.score}`
-          : audit.scoreDisplayMode === "notApplicable"
-          ? "Not Applicable"
-          : audit.scoreDisplayMode === "informative"
-          ? "Informative"
-          : `Audit: ${audit.score === 1 ? "Passed" : "Failed"}`}
-      </p>
+      <div className="flex items-center justify-start gap-2 px-2 ">
+        <Check
+          className={cn(
+            "hidden rounded-full bg-success/10 size-4 text-success",
+            audit.scoreDisplayMode !== "numeric" &&
+              audit.score === 1 &&
+              "!block"
+          )}
+        />
+        <X
+          className={cn(
+            "hidden rounded-full bg-destructive/10 size-4 text-destructive",
+            audit.scoreDisplayMode !== "numeric" &&
+              audit.scoreDisplayMode !== "notApplicable" &&
+              audit.score !== 1 &&
+              "!block"
+          )}
+        />
+        <X
+          className={cn(
+            "hidden rounded-full bg-gray-300/10 size-4 text-gray-300",
+            audit.scoreDisplayMode === "notApplicable" && "!block"
+          )}
+        />
+        <p>
+          {audit.scoreDisplayMode === "numeric"
+            ? `Score: ${audit.score}`
+            : audit.scoreDisplayMode === "notApplicable"
+            ? "Not Applicable"
+            : audit.scoreDisplayMode === "informative"
+            ? "Informative"
+            : `Audit: ${audit.score === 1 ? "Passed" : "Failed"}`}
+        </p>
+      </div>
       <span
         className={cn(
           " px-2  rounded-lg hidden max-w-18",
@@ -57,27 +84,17 @@ export const AuditsList = ({ audit }: Props) => {
       >
         {audit.displayValue}
       </span>
-
       {showAll && (
-        <div className="text-sm text-foreground/80 italic bg-accent p-2 rounded-lg m-4">
-          {" "}
-          <Markdown>{audit.description}</Markdown>
+        <div className="bg-muted rounded-lg p-2 flex flex-col gap-4 mt-6">
+          <div className="text-sm text-foreground/80 italic">
+            {" "}
+            <Markdown>{audit.description}</Markdown>
+          </div>
+          {audit.details && (
+            <AuditDetailsRenderer details={audit.details as AuditDetails} />
+          )}
         </div>
       )}
     </div>
   );
-};
-
-const IconScore = ({ score }: { score: number | null }) => {
-  if (score !== null && score <= 0.49) {
-    return (
-      <Triangle className="text-destructive fill-destructive size-3 rotate-180" />
-    );
-  } else if (score !== null && score > 0.49 && score <= 0.89) {
-    return <Square className="text-warning fill-warning size-3" />;
-  } else if (score === null) {
-    return <Square className="text-gray-400 fill-gray-400 size-3" />;
-  } else {
-    return <Circle className="text-success fill-success size-3" />;
-  }
 };

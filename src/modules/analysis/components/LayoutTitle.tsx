@@ -1,7 +1,7 @@
 "use client";
 import { GetPathName } from "@/modules/user/helpers/getPathName";
 import { useURLStore } from "@/store/urlStore";
-import { FileText } from "lucide-react";
+import { FileText, Link } from "lucide-react";
 
 export const LayoutTitle = () => {
   const pathName = GetPathName();
@@ -14,8 +14,8 @@ export const LayoutTitle = () => {
           {pathName.path === "/free-report" ? "Free Report" : "Pro Report"}
         </h2>
       </div>
-      <p className="text-sm bg-accent px-2 rounded-lg text-accent-foreground ">
-        {url}
+      <p className="text-sm bg-accent px-2 rounded-lg text-accent-foreground flex items-center justify-start gap-1">
+        <Link className="size-4" /> {url}
       </p>
     </div>
   );

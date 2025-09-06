@@ -5,6 +5,8 @@ import { ReportHeader } from "./ReportHeader";
 import { Separator } from "@/modules/ui/athoms";
 import { AuditsList } from "./AuditList";
 import Image from "next/image";
+import { Calendar, Clock, Link, LucideIcon } from "lucide-react";
+import { InfoPanel } from "./InfoPanel";
 
 interface Props {
   dataOrigin: "mobile" | "desktop";
@@ -47,9 +49,20 @@ export const ReportPage = ({ dataOrigin }: Props) => {
   const screenShoots =
     returnedData.response?.lighthouseResult?.audits["screenshot-thumbnails"]
       ?.details?.items;
+  console.log(returnedData.response);
 
-  console.log(screenShoots);
+  const auditTimeStamp = new Date(
+    returnedData.response?.analysisUTCTimestamp ?? new Date()
+  );
 
+  const requestedUrl =
+    returnedData.response?.lighthouseResult?.requestedUrl ?? "";
+
+  const timing = (
+    (returnedData.response?.lighthouseResult?.timing?.total ?? 1) / 1000
+  ).toFixed(2);
+
+  const warnings = returnedData.response?.lighthouseResult?.runWarnings ?? [];
   return (
     <div className="min-h-96  flex-center flex-col gap-8 container mx-auto">
       <CardWrapper title="Speed Insight" className={cn("w-full relative")}>
@@ -71,12 +84,28 @@ export const ReportPage = ({ dataOrigin }: Props) => {
           seoScore={seoScore}
           screenShoot={screenShoot}
         />
+        <div className="bg-accent/5 text-accent-foreground w-full p-6 grid lg:grid-cols-3 md:grid-cols-2 gap-4 rounded-t-lg">
+          <InfoPanel
+            label="Audit Date"
+            icon={Calendar}
+            value={auditTimeStamp.toLocaleDateString()}
+          />
+          <InfoPanel label="Requested URL" icon={Link} value={requestedUrl} />
+          <InfoPanel label="Responsed Timing" icon={Clock} value={timing} />
+        </div>
+        {warnings?.length > 0 && (
+          <div className="p-4 flex items-start justify-start flex-col bg-warning/10 text-warning gap-4">
+            {warnings.map((warning, index) => (
+              <p key={index}>{warning}</p>
+            ))}
+          </div>
+        )}
         <Separator />
         <CardWrapper
-          className="border-0 bg-transparent shadow-none p-1"
+          className="border-0 bg-transparent shadow-none"
           title={"Metrics"}
         >
-          <CardWrapper title="Core Web Vitals">
+          <CardWrapper title="Core Web Vitals" className="my-4">
             <div className="w-full h-64 rounded-lg grid grid-cols-8">
               {screenShoots.map((screen: { data: string }, index: number) => (
                 <div className="relative " key={index}>
@@ -95,7 +124,7 @@ export const ReportPage = ({ dataOrigin }: Props) => {
                   <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-lg text-primary-foreground rounded-full size-6 flex-center">
                     {index + 1}
                   </span>
-                  <span className="absolute top-0 left-0 w-full h-full  bg-gradient-to-b from-card via-card/5 to-card "></span>
+                  <span className="absolute top-0 left-0 w-full h-full  bg-gradient-to-b from-card  to-card/5 "></span>
                 </div>
               ))}
             </div>
@@ -106,21 +135,21 @@ export const ReportPage = ({ dataOrigin }: Props) => {
               })}
             </div>
           </CardWrapper>
-          <CardWrapper title="Best Practices">
+          <CardWrapper title="Best Practices" className="my-4">
             <div className="w-full grid lg:grid-cols-2 gap-4">
               {bestPracticesMetrics.map((audit) => {
                 return <AuditsList audit={audit} key={audit.id} />;
               })}
             </div>
           </CardWrapper>
-          <CardWrapper title="SEO">
+          <CardWrapper title="SEO" className="my-4">
             <div className="w-full grid lg:grid-cols-2 gap-4">
               {seoMetrics.map((audit) => {
                 return <AuditsList audit={audit} key={audit.id} />;
               })}
             </div>
           </CardWrapper>
-          <CardWrapper title="Accessibility">
+          <CardWrapper title="Accessibility" className="my-4">
             <div className="w-full grid lg:grid-cols-2 gap-4">
               {accessibilityMetrics.map((audit) => {
                 return <AuditsList audit={audit} key={audit.id} />;
