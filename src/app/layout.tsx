@@ -6,7 +6,7 @@ import { ThemeProvider } from "@/providers/ThemeProvider";
 import DashboardLayout from "@/modules/ui/layout/Dashboard.Layout";
 
 export const metadata: Metadata = {
-  title: "Tamer Digital GM SEO Calculator",
+  title: "Tamer Digital GMB SEO Tool",
   description: "App for search and find strenged points in your website",
 };
 
